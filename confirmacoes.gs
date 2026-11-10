@@ -14,7 +14,8 @@
  *
  * Painel da família: painel-3ayuea5adj.html (a senha já vai dentro do painel; é a CHAVE_PAINEL abaixo).
  *
- * LIMITE POR LINK: cada link do convite termina em ?c=CÓDIGO. A planilha só aceita até o limite do código.
+ * LIMITE POR LINK: cada link do convite termina em ?c=CÓDIGO. O convite repassa esse código para cá como 'cod'
+ * (nunca 'c' ou 'sid': são nomes reservados do Google). A planilha só aceita até o limite do código.
  * Link sem código (ou com código errado) = 1 pessoa.
  *
  * Se você mudar este código depois: Implantar → Gerenciar implantações → lápis → Versão: Nova versão.
@@ -90,7 +91,8 @@ function registrar_(p) {
     if (!nome) return resposta_({ ok: false, erro: 'sem nome' });
 
     const vai = p.vai === 'sim';
-    const limite = CODIGOS[String(p.c || '').toLowerCase()] || 1;   // confere o limite aqui, não só no convite
+    // o código do link chega como 'cod' (o Google reserva 'c' e 'sid' — com eles o pedido nem chega aqui)
+    const limite = CODIGOS[String(p.cod || '').toLowerCase()] || 1;   // confere o limite aqui, não só no convite
     const pessoas = vai ? Math.min(limite, Math.max(1, parseInt(p.pessoas, 10) || 1)) : 0;
     const id = limpa(p.id, 40) || Utilities.getUuid();
     const linha = [new Date(), nome, vai ? 'Vai ✅' : 'Não vai ❌', pessoas, limpa(p.recado, 500), id, 'até ' + limite];
@@ -155,4 +157,10 @@ function abaConfirmacoes_(ss) {
 
 function resposta_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Teste pelo editor: escolha "testarConfirmacao" e clique em Executar. Grava uma linha "Teste editor" na planilha. */
+function testarConfirmacao() {
+  const r = registrar_({ nome: 'Teste editor', vai: 'sim', pessoas: '9', cod: '4rffk6', id: 'teste-editor' });
+  Logger.log(r.getContent() + '  (pediu 9 pessoas num link de até 3: tem que gravar 3)');
 }

@@ -1008,7 +1008,7 @@
             const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 15000);
             // Envia pelo mesmo caminho que o painel usa para ler (GET) e LÊ a resposta do Google:
             // se a planilha não gravar, o convidado vê o erro em vez de um "obrigado" falso.
-            const q = new URLSearchParams({ acao: 'confirmar', id: d.id, nome: d.nome, vai: d.vai, pessoas: String(d.pessoas), recado: d.recado, c: codigo, t: String(Date.now()) });
+            const q = new URLSearchParams({ acao: 'confirmar', id: d.id, nome: d.nome, vai: d.vai, pessoas: String(d.pessoas), recado: d.recado, cod: codigo, t: String(Date.now()) });   // atenção: o Google reserva os nomes 'c' e 'sid' — não usar
             const resp = await fetch(CONFIG.planilha + '?' + q.toString(), { signal: ctl.signal });
             const json = await resp.json();
             clearTimeout(tm);

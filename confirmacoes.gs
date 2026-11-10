@@ -3,9 +3,11 @@
  * Casamento Maria Luíza & Lucas Henrique — 10/07/2027
  *
  * Como usar (uma vez por convite):
- *  1. Crie uma planilha nova no Google Sheets.
- *  2. Menu Extensões → Apps Script. Apague o que tiver e cole este arquivo inteiro. Salve.
- *  3. No topo, escolha a função "configurar" e clique em Executar (autorize quando o Google pedir).
+ *  1. Cole este arquivo inteiro no Apps Script e salve. Pode ser um projeto avulso (script.google.com)
+ *     ou aberto pela planilha (Extensões → Apps Script) — funciona dos dois jeitos.
+ *  2. No topo, escolha a função "configurar" e clique em Executar (autorize quando o Google pedir).
+ *     Num projeto avulso, ela CRIA a planilha sozinha — o link aparece no "Registro de execução".
+ *  3. (continua igual abaixo)
  *  4. Implantar → Nova implantação → App da Web
  *       Executar como: Eu  |  Quem pode acessar: Qualquer pessoa
  *  5. Copie o "URL do app da Web" (termina em /exec) e cole em CONFIG.planilha no index.html.
@@ -34,7 +36,13 @@ const CODIGOS = {
 
 /** Rode uma vez: cria a aba de confirmações e a aba de resumo com os totais. */
 function configurar() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {                               // projeto avulso: usa (ou cria) a planilha deste convite
+    const props = PropertiesService.getScriptProperties();
+    const id = props.getProperty('PLANILHA_ID');
+    ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create('Confirmações • Maria Luíza & Lucas Henrique');
+    props.setProperty('PLANILHA_ID', ss.getId());
+  }
   abaConfirmacoes_(ss);
 
   const r = ss.getSheetByName('Resumo') || ss.insertSheet('Resumo', 0);
@@ -51,6 +59,16 @@ function configurar() {
   r.setColumnWidth(2, 90);
   r.getRange('A7').setValue('A lista completa fica na aba "Confirmações". Se alguém mudar a resposta, a linha dele é atualizada.')
     .setFontColor('#888888');
+  Logger.log('Planilha das confirmações: ' + ss.getUrl());
+}
+
+/** A planilha do convite: a que abriu o script ou a que o "configurar" criou. */
+function planilha_() {
+  const ativa = SpreadsheetApp.getActiveSpreadsheet();
+  if (ativa) return ativa;
+  const id = PropertiesService.getScriptProperties().getProperty('PLANILHA_ID');
+  if (!id) throw new Error('Rode a função "configurar" uma vez antes de usar.');
+  return SpreadsheetApp.openById(id);
 }
 
 /** Recebe cada confirmação enviada pelo convite. */
@@ -72,7 +90,7 @@ function doPost(e) {
     const id = limpa(p.id, 40) || Utilities.getUuid();
     const linha = [new Date(), nome, vai ? 'Vai ✅' : 'Não vai ❌', pessoas, limpa(p.recado, 500), id, 'até ' + limite];
 
-    const sh = abaConfirmacoes_(SpreadsheetApp.getActiveSpreadsheet());
+    const sh = abaConfirmacoes_(planilha_());
     const ultima = sh.getLastRow();
     let alvo = ultima + 1;                 // linha nova…
     if (ultima > 1) {                      // …ou atualiza a mesma pessoa, se ela mudou a resposta
@@ -96,7 +114,7 @@ function doGet(e) {
   if (!p.chave) return resposta_({ ok: true, msg: 'Receptor de confirmações ativo' });
   if (p.chave !== CHAVE_PAINEL) return resposta_({ ok: false, erro: 'chave' });
 
-  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ABA);
+  const sh = planilha_().getSheetByName(ABA);
   const n = sh ? sh.getLastRow() - 1 : 0;
   const lista = n > 0
     ? sh.getRange(2, 1, n, 5).getValues()

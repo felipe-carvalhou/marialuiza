@@ -333,6 +333,26 @@
       text-shadow:0 -1px 0 rgba(120,20,40,.55),0 1px 0 rgba(255,220,190,.3)}
     .env-selo span em{font-family:'Mrs Saint Delafield',cursive;font-style:normal;font-size:1.15em;margin:0 .04em}
     .env.abrindo .env-selo{transform:translate(-50%,-50%) scale(1.3);opacity:0}
+
+    /* ===== Envelope deste casamento: papel branco, selo dourado de Nossa Senhora e forro com a igreja em aquarela ===== */
+    .env{filter:drop-shadow(0 22px 28px rgba(90,30,30,.32))}
+    /* o forro é UMA imagem contínua: da ponta da aba aberta (58% acima do envelope) até o fundo do "V" (55% para baixo) */
+    .env{--h:calc(min(330px,84vw) / 1.45)}
+    .env-costas{background:url("forro.jpg") center calc(var(--h) * -.58) / auto calc(var(--h) * 1.13) no-repeat,#f4f1ea}
+    .env-frente{background:var(--papel),linear-gradient(170deg,#ffffff 0%,#f8f6f1 60%,#efebe3 100%)}
+    .env-frente::after{background:linear-gradient(0deg,rgba(120,100,70,.07),rgba(255,255,255,.3))}
+    .env-aba{filter:drop-shadow(0 4px 3px rgba(90,70,40,.2))}
+    .env-aba i{background:var(--papel),linear-gradient(180deg,#ffffff,#eeeae2)}
+    /* forro: aparece por dentro da aba quando ela vira */
+    .env-aba i::after{content:"";position:absolute;left:0;right:0;top:0;height:58%;background:url("forro.jpg") center 0 / auto calc(var(--h) * 1.13) no-repeat;
+      transform:scaleY(-1);opacity:0;transition:opacity 0s linear .75s}
+    .env.abrindo .env-aba i::after{opacity:1}
+    .env-selo{width:84px;height:84px;border-radius:50%;background:url("selo.png") center/cover;
+      box-shadow:0 3px 8px rgba(90,60,10,.35), 0 1px 2px rgba(90,60,10,.3)}
+    .env-selo::before,.env-selo span{display:none !important}
+    /* aberto = como na foto: aba virada com a igreja, sem carta subindo */
+    .env-carta{display:none !important}
+    .env.abrindo{transform:translateY(70px)}
     .c-eyebrow,.c-names,.c-hint{transition:opacity .6s ease .25s}
     .capa.abrindo .c-eyebrow,.capa.abrindo .c-names,.capa.abrindo .c-hint{opacity:0}
     .c-hint{margin-top:30px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-shadow:0 1px 8px rgba(150,40,40,.35)}
@@ -1095,7 +1115,7 @@
       $('env').addEventListener('click', () => {
         if (aberto) return; aberto = true; vibra(15); tocarMusica();
         $('env').classList.add('abrindo'); $('capa').classList.add('abrindo');
-        setTimeout(abrir, 2000);
+        setTimeout(abrir, 2900);   // segura o envelope aberto (com a igreja) antes de mostrar o convite
       });
       // link com #convite pula o envelope — útil para testar
       if (location.hash === '#convite' || location.search.includes('abrir')) { document.body.classList.add('opened'); document.body.classList.remove('locked'); $('capa').remove(); }

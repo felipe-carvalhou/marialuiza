@@ -18,6 +18,7 @@
  * Link sem código (ou com código errado) = 1 pessoa.
  *
  * Se você mudar este código depois: Implantar → Gerenciar implantações → lápis → Versão: Nova versão.
+ * (Use sempre "Gerenciar implantações": assim o link /exec continua o mesmo e não precisa mexer no convite.)
  * (Sem isso, o link continua rodando o código antigo.)
  */
 
@@ -71,12 +72,16 @@ function planilha_() {
   return SpreadsheetApp.openById(id);
 }
 
-/** Recebe cada confirmação enviada pelo convite. */
+/** Recebe confirmação por POST (jeito antigo — continua aceitando). */
 function doPost(e) {
+  return registrar_((e && e.parameter) || {});
+}
+
+/** Grava (ou atualiza) uma confirmação na planilha. */
+function registrar_(p) {
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);                    // evita que duas respostas ao mesmo tempo se atropelem
   try {
-    const p = (e && e.parameter) || {};
     const limpa = (t, n) => {              // corta o tamanho e impede fórmulas maliciosas na planilha
       const s = String(t || '').trim().slice(0, n);
       return /^[=+\-@]/.test(s) ? "'" + s : s;
@@ -106,11 +111,13 @@ function doPost(e) {
 }
 
 /**
+ * ?acao=confirmar&...: grava a confirmação enviada pelo convite (é o caminho que o convite usa).
  * Sem senha: só mostra que está funcionando.
  * Com ?chave=SENHA certa: devolve a lista de confirmações para o painel da família.
  */
 function doGet(e) {
   const p = (e && e.parameter) || {};
+  if (p.acao === 'confirmar') return registrar_(p);
   if (!p.chave) return resposta_({ ok: true, msg: 'Receptor de confirmações ativo' });
   if (p.chave !== CHAVE_PAINEL) return resposta_({ ok: false, erro: 'chave' });
 

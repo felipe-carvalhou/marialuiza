@@ -1006,9 +1006,13 @@
           btn.disabled = true; btn.textContent = 'Enviando…'; erro.textContent = '';
           try {
             const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 15000);
-            await fetch(CONFIG.planilha, { method: 'POST', mode: 'no-cors', signal: ctl.signal,
-              body: new URLSearchParams({ id: d.id, nome: d.nome, vai: d.vai, pessoas: String(d.pessoas), recado: d.recado, c: codigo }) });
+            // Envia pelo mesmo caminho que o painel usa para ler (GET) e LÊ a resposta do Google:
+            // se a planilha não gravar, o convidado vê o erro em vez de um "obrigado" falso.
+            const q = new URLSearchParams({ acao: 'confirmar', id: d.id, nome: d.nome, vai: d.vai, pessoas: String(d.pessoas), recado: d.recado, c: codigo, t: String(Date.now()) });
+            const resp = await fetch(CONFIG.planilha + '?' + q.toString(), { signal: ctl.signal });
+            const json = await resp.json();
             clearTimeout(tm);
+            if (!json || !json.ok) throw new Error((json && json.erro) || 'planilha');
           } catch (err) {
             btn.disabled = false; btn.textContent = txt;
             erro.textContent = 'Não conseguimos enviar agora. Confira sua internet e tente de novo.'; return;

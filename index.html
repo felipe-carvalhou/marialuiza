@@ -196,6 +196,39 @@
     .sug .btn{width:100%;padding-left:8px;padding-right:8px}
     .sug-aviso{max-width:400px;margin:0 auto;font-size:12.5px;line-height:1.6;color:var(--ink);max-height:0;overflow:hidden;opacity:0;transition:all .4s}
     .sug-aviso.on{max-height:120px;opacity:1;margin-top:16px;padding:12px 14px;border-radius:14px;background:#fff1e2}
+    .sug-preco{display:block;margin:-6px 0 12px;font-size:13px;font-weight:600;color:#c2410c}
+    #f-ver-lista{margin-top:20px}
+
+    /* Janela da lista completa */
+    .lista-modal{width:100%;max-width:520px;max-height:92vh;max-height:92svh;margin:auto auto 0;padding:0;border:0;border-radius:24px 24px 0 0;
+      background:var(--cream);color:var(--ink);box-shadow:0 -10px 40px rgba(60,20,10,.25)}
+    .lista-modal[open]{display:flex;flex-direction:column;animation:sobe .35s ease}
+    .lista-modal::backdrop{background:rgba(45,18,10,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+    @keyframes sobe{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+    @media (min-width:600px){.lista-modal{margin:auto;border-radius:24px;max-height:86vh}}
+    .lm-topo{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:22px 20px 12px;border-bottom:1px solid var(--line)}
+    .lm-kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#c2410c}
+    .lm-topo h3{margin-top:6px;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:1.35rem}
+    .lm-fechar{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);font-size:24px;line-height:1;color:var(--ink);cursor:pointer}
+    .lm-topo,.lm-filtros,.lm-barra,.lm-rodape{flex:none}
+    .lm-filtros{display:flex;gap:8px;overflow-x:auto;padding:14px 20px 4px;scrollbar-width:none}
+    .lm-filtros::-webkit-scrollbar{display:none}
+    .lm-chip{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font:600 11px 'Montserrat',sans-serif;
+      letter-spacing:.06em;color:var(--ink-soft);cursor:pointer}
+    .lm-chip[aria-pressed="true"]{background:var(--sunset);border-color:transparent;color:#fff}
+    .lm-barra{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;font-size:11.5px;color:var(--ink-soft)}
+    .lm-ordem{border:0;background:none;font:600 11.5px 'Montserrat',sans-serif;color:#c2410c;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+    .lm-lista{list-style:none;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 8px;flex:1}
+    .lm-item{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:12px 10px;border-radius:16px;background:var(--paper);
+      border:1px solid var(--line);margin-bottom:8px}
+    .lm-ic{width:42px;height:42px;border-radius:50%;background:#fff1e2;color:#c2410c;display:flex;align-items:center;justify-content:center}
+    .lm-ic svg{width:26px;height:26px}
+    .lm-nome{font-size:13px;line-height:1.35;color:var(--ink)}
+    .lm-valor{display:block;margin-top:3px;font-size:13px;font-weight:600;color:#c2410c}
+    .lm-item a{padding:10px 14px;border-radius:999px;background:var(--sunset);color:#fff;text-decoration:none;font:600 10.5px 'Montserrat',sans-serif;
+      letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;box-shadow:0 6px 14px rgba(230,73,128,.25)}
+    .lm-rodape{padding:12px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line);font-size:11.5px;line-height:1.6;color:var(--ink-soft);text-align:center}
+    body.modal-aberto{overflow:hidden}
     .pix-titulo{margin-top:26px;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft)}
     .pix{margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
     .pix-nome{margin-top:10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
@@ -488,10 +521,28 @@
       <symbol id="i-sofa" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15v-4a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v4"/><path d="M4 17.5a2.5 2.5 0 0 1 5 0V20h14v-2.5a2.5 2.5 0 0 1 5 0V24H4z"/><path d="M9 20v-2.5h14V20M7 24v2.5M25 24v2.5"/></symbol>
       <symbol id="i-microondas" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="26" height="18" rx="2"/><rect x="6.5" y="10.5" width="14" height="11" rx="1"/><path d="M24.5 11h1.5M24.5 14.5h1.5M24.5 18h1.5M7 27v-2M25 27v-2"/></symbol>
       <symbol id="i-airfryer" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h12a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z"/><path d="M6 16h20"/><circle cx="16" cy="10" r="2.4"/><path d="M12.5 20.5h7a1.5 1.5 0 0 1 0 3h-7a1.5 1.5 0 0 1 0-3z"/></symbol>
+      <symbol id="i-panela" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13h20v8a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5z"/><path d="M2.5 15H6M26 15h3.5M10 13a6 6 0 0 1 12 0M16 7V5.5"/></symbol>
+      <symbol id="i-cama" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v18M4 19h24v7M28 19v-3a3 3 0 0 0-3-3H14v6"/><path d="M7.5 15.5a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0-4.4 0z"/></symbol>
+      <symbol id="i-aviao" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M29 6.5c-.8-.8-2.3-.6-3.4.5l-4.4 4.4L9 8l-2.5 2.5 9.8 5.2-4.6 4.6-3.9-.6L5.6 22l4.6 2.3 2.3 4.6 2.2-2.2-.6-3.9 4.6-4.6 5.2 9.8L26.4 25.5 23 13.3l4.4-4.4c1.1-1.1 1.4-2.6.6-3.4z"/></symbol>
       <symbol id="i-cruz" viewBox="0 0 12 18"><path d="M5.2 0h1.6v4.6H11v1.6H6.8V18H5.2V6.2H1V4.6h4.2z" fill="currentColor"/></symbol>
       <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8-8-2z"/></symbol>
     </defs>
   </svg>
+
+  <!-- JANELA: lista completa de presentes -->
+  <dialog class="lista-modal" id="listaModal" aria-labelledby="lmTitulo">
+    <div class="lm-topo">
+      <div>
+        <p class="lm-kicker">Lista de presentes</p>
+        <h3 id="lmTitulo">Escolha o seu presente</h3>
+      </div>
+      <button class="lm-fechar" id="lmFechar" type="button" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="lm-filtros" id="lmFiltros" role="group" aria-label="Categorias"></div>
+    <div class="lm-barra"><span id="lmQtd"></span><button type="button" class="lm-ordem" id="lmOrdem">Menor preço primeiro</button></div>
+    <ul class="lm-lista" id="lmLista"></ul>
+    <p class="lm-rodape">Ao tocar em <b>Presentear</b>, você vai para o pagamento seguro do presente. Prefere enviar outro valor? Feche esta janela e use a chave Pix.</p>
+  </dialog>
 
   <div id="petals"></div>
   <button class="music-btn" id="btnMusica" type="button" aria-label="Pausar música" hidden><i></i><i></i><i></i><i></i></button>
@@ -650,6 +701,9 @@
       <p class="lead" id="f-presente-txt"></p>
       <div class="sugestoes" id="f-sugestoes" hidden></div>
       <p class="sug-aviso" id="sugAviso" aria-live="polite"></p>
+      <div class="actions" id="f-ver-lista" hidden>
+        <button class="btn btn-main" type="button" id="btnListaCompleta">Ver lista completa</button>
+      </div>
       <p class="pix-titulo" id="f-pix-titulo" hidden>Ou contribua com o valor que preferir</p>
       <div class="pix" id="f-pix-box" hidden>
         <code id="f-pix"></code>
@@ -780,14 +834,63 @@
       trajeMadrinhas: '',
 
       presentes: {
-        texto: 'Sua presença é o nosso maior presente. Se quiser nos presentear, separamos algumas ideias para o nosso novo lar: é só escolher e enviar pelo Pix.',
+        texto: 'Sua presença é o nosso maior presente. Se quiser nos presentear, separamos algumas ideias para o nosso novo lar e para a lua de mel: é só escolher e tocar em Presentear.',
         pix: '701.704.336-02', pixNome: 'Lucas Henrique da Silva', lista: '',
         // Sugestões (ícones: mesa, sofa, microondas, airfryer). Vazio = só a chave Pix.
+        // Destaques (cartões). Com "link", o botão abre o pagamento do item; sem link, copia a chave Pix.
         sugestoes: [
-          { nome: 'Mesa de jantar', texto: 'Para reunir a família e os amigos em volta da mesa', icone: 'mesa' },
-          { nome: 'Sofá',           texto: 'Para as noites de filme e os domingos a dois',        icone: 'sofa' },
-          { nome: 'Micro-ondas',    texto: 'Para dar conta da correria do dia a dia',             icone: 'microondas' },
-          { nome: 'Air fryer',      texto: 'Para o jantar ficar pronto rapidinho',                icone: 'airfryer' }
+          { nome: 'Mesa de jantar', texto: 'Para reunir a família e os amigos em volta da mesa', icone: 'mesa',       preco: 1979.01, link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-Ii2mO0ahUn-1979,01' },
+          { nome: 'Sofá',           texto: 'Para as noites de filme e os domingos a dois',        icone: 'sofa',       preco: 2688.30, link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-JVoMhbt8YR-2688,30' },
+          { nome: 'Micro-ondas',    texto: 'Para dar conta da correria do dia a dia',             icone: 'microondas', preco: 769.88,  link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-YKmaAvwZAc-769,88' },
+          { nome: 'Air fryer',      texto: 'Para o jantar ficar pronto rapidinho',                icone: 'airfryer',   preco: 888.66,  link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-AUUtmUr98c-888,66' }
+        ],
+        // Lista completa (abre na janela "Ver lista completa"). cat: cozinha, casa, cama, luademel
+        listaCompleta: [
+          { nome: 'Toalha de Rosto Egitto Elegance', preco: 103.69, cat: 'cama', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-3gVhkkiPY0-103,69' },
+          { nome: 'Jogo de 3 travessas', preco: 129.66, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-xt03M8XN4T-129,66' },
+          { nome: 'Toalha para Banho Lorenzi 86 cm x 1,50 m', preco: 159.59, cat: 'cama', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-sSVYOTSp2s-159,59' },
+          { nome: 'Jogo Para Churrasco Polywood Inox 3 Peças', preco: 192.32, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-A5QSb8hqaK-192,32' },
+          { nome: 'Jogo Taça Vinho Branco Lyon 3 peças 230 ML', preco: 212.92, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-9pPhxZeffy-212,92' },
+          { nome: 'Pipoqueira Elétrica Pop Movie 1200W 127V - Cadence', preco: 222.78, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTEtSQ-eMRed7mugJ-222,78' },
+          { nome: 'Sofá Retrátil Declinável', preco: 2688.30, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-JVoMhbt8YR-2688,30' },
+          { nome: 'Mesa de centro', preco: 412.73, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-9yEuOXX4Ug-412,73' },
+          { nome: 'Jogo de Edredom Queen Max 3 Peças', preco: 882.70, cat: 'cama', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-JfSuzfiQcE-882,70' },
+          { nome: 'Gasolina para a lua de mel do casal', preco: 360.79, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLTItSQ-KfZrT8ms7m-360,79' },
+          { nome: 'Frigobar Electrolux 120L', preco: 1264.14, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-1GvQbfzQRd-1264,14' },
+          { nome: 'Jogo de Prato Raso Legacy 6 Peças - Germer', preco: 251.74, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTItSQ-qHRd5Hh5fw-251,74' },
+          { nome: 'Lava e Seca Samsung Inox', preco: 4172.36, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-ZJPo8VnpH0-4172,36' },
+          { nome: 'Cota jantar romântico o casal', preco: 362.59, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLTItSQ-QvfTRxdvkC-362,59' },
+          { nome: 'Aparelho de Jantar Polka Dots 20 Peças', preco: 578.96, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-hGRCq42cRz-578,96' },
+          { nome: 'Aluguel de carro lua de mel', preco: 2370.96, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-7UwLP1TZh2-2370,96' },
+          { nome: 'Escorredor de Louças Inox Madri Cromado', preco: 447.94, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-KBbSlWNXN0-447,94' },
+          { nome: 'Cooktop de indução Brastemp', preco: 1044.60, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-8DazEBMd4X-1044,60' },
+          { nome: 'Jogo de Lençol Casal New Soft 4 peças - Home Style', preco: 260.88, cat: 'cama', link: 'https://link.infinitepay.io/lukinha09/VC1DLTItSQ-g2xWdm5ro8-260,88' },
+          { nome: 'Aspirador Robô Keep Clean', preco: 2247.04, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-qVkSTmjbf1-2247,04' },
+          { nome: 'MOP Giratório Ciclone 12 L - Flash Limp', preco: 395.34, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-N4wl43EZKl-395,34' },
+          { nome: 'Mesa de jantar 6 lugares', preco: 1979.01, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-Ii2mO0ahUn-1979,01' },
+          { nome: 'Jogo de Taça de Vinho Salute 710 ml 4 Peças', preco: 298.96, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTItSQ-sGN3SbqZcK-298,96' },
+          { nome: 'Ar Condicionado Split Inverter 12000 BTUs', preco: 3093.19, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-qD2fJXAR6D-3093,19' },
+          { nome: 'Espremedor de Frutas Chrome 500 ml Automático', preco: 344.65, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-fdj8KhCW2l-344,65' },
+          { nome: 'Lava Louças em Inox 14 Serviços', preco: 5491.84, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLUEtSQ-zs1a1keNWi-5491,84' },
+          { nome: 'Rack e painel de TV 55', preco: 853.04, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-ge9kOic777-853,04' },
+          { nome: 'Panela Elétrica Chef 630W', preco: 533.27, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-J1NTe9P14V-533,27' },
+          { nome: '2 passagens aéreas lua de mel', preco: 2451.30, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-ov74jYaOPG-2451,30' },
+          { nome: 'Assadeira Retangular Alumínio Ecolon 43 cm x 21 cm', preco: 432.72, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-PszQEqfjpl-432,72' },
+          { nome: 'Microondas Electrolux 42L', preco: 769.88, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-YKmaAvwZAc-769,88' },
+          { nome: 'Cota para a Lua de Mel do casal', preco: 1649.69, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLTYtSQ-PHvSlbyVXz-1649,69' },
+          { nome: 'Jogo de Colcha Casal Maite 3 Peças Buddemeyer', preco: 510.41, cat: 'cama', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-by0d3Dwq8b-510,41' },
+          { nome: 'Air fryer Mondial 12L', preco: 888.66, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-AUUtmUr98c-888,66' },
+          { nome: 'Chuveiro Lorenzetti Aqua Duo', preco: 699.68, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-LX3uD20oaf-699,68' },
+          { nome: 'Escrivaninha escritório', preco: 472.42, cat: 'casa', link: 'https://link.infinitepay.io/lukinha09/VC1DLTMtSQ-lSFe6QuRxc-472,42' },
+          { nome: 'Faqueiro Berna 30 Peças', preco: 1360.87, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTUtSQ-4TwpvEAJvL-1360,87' },
+          { nome: 'Grill Elétrico Clássica 1200W', preco: 615.53, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-cNpOQI4z9p-615,53' },
+          { nome: 'Cafeteira Expresso Modo S04', preco: 740.43, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-e4zSexEWKr-740,43' },
+          { nome: 'Batedeira Planetária Bowl 750W', preco: 792.24, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-fMQvTpfb2f-792,24' },
+          { nome: 'Panela de Pressão Elétrica', preco: 657.05, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-0vrWoEmyNJ-657,05' },
+          { nome: 'Multiprocessador Chrome 7 Peças', preco: 662.75, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-xga1MvZpCE-662,75' },
+          { nome: 'Jogo de Panelas Smart 5 Peças', preco: 569.82, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLTQtSQ-mJ779Vx3rZ-569,82' },
+          { nome: 'Geladeira Frost Free French Door 3 Portas 110V', preco: 6794.93, cat: 'cozinha', link: 'https://link.infinitepay.io/lukinha09/VC1DLUMtSQ-03diCYtk5R-6794,93' },
+          { nome: 'Patrocine a lua de mel', preco: 16125.70, cat: 'luademel', link: 'https://link.infinitepay.io/lukinha09/VC1DLUMtSQ-PJ4Lzdr6bo-16125,70' }
         ]
       },
 
@@ -988,6 +1091,8 @@
     }
     if (CONFIG.trajeMadrinhas) { $('f-traje').hidden = false; $('f-traje').textContent = `Traje das madrinhas: ${CONFIG.trajeMadrinhas}`; }
 
+    const brl = (v) => Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
     // Presentes
     (function(){
       const p = CONFIG.presentes;
@@ -1006,6 +1111,45 @@
       }
       if (p.lista) { $('f-lista-box').hidden = false; $('f-lista').href = p.lista; }
 
+      // Lista completa numa janela (filtro por categoria + ordem por preço)
+      if (p.listaCompleta && p.listaCompleta.length) {
+        const modal = $('listaModal'), CATS = { todos: 'Todos', cozinha: 'Cozinha', casa: 'Casa', cama: 'Cama e banho', luademel: 'Lua de mel' };
+        const ICONE = { cozinha: 'panela', casa: 'sofa', cama: 'cama', luademel: 'aviao' };
+        let filtro = 'todos', crescente = true;
+        $('f-ver-lista').hidden = false;
+        $('btnListaCompleta').textContent = `Ver os ${p.listaCompleta.length} presentes`;
+        Object.entries(CATS).forEach(([k, v]) => {
+          if (k !== 'todos' && !p.listaCompleta.some(x => x.cat === k)) return;
+          const b = document.createElement('button'); b.type = 'button'; b.className = 'lm-chip'; b.textContent = v;
+          b.setAttribute('aria-pressed', String(k === filtro));
+          b.onclick = () => { filtro = k; $('lmFiltros').querySelectorAll('.lm-chip').forEach(o => o.setAttribute('aria-pressed', String(o === b))); desenharLista(); };
+          $('lmFiltros').append(b);
+        });
+        function desenharLista() {
+          const vis = p.listaCompleta.filter(x => filtro === 'todos' || x.cat === filtro).sort((a, b) => crescente ? a.preco - b.preco : b.preco - a.preco);
+          $('lmQtd').textContent = vis.length + (vis.length === 1 ? ' presente' : ' presentes');
+          $('lmOrdem').textContent = crescente ? 'Menor preço primeiro' : 'Maior preço primeiro';
+          const ul = $('lmLista'); ul.textContent = '';
+          vis.forEach(x => {
+            const li = document.createElement('li'); li.className = 'lm-item';
+            li.innerHTML = `<span class="lm-ic"><svg aria-hidden="true"><use href="#i-${ICONE[x.cat] || 'panela'}"/></svg></span>
+              <span><span class="lm-nome">${esc(x.nome)}</span><b class="lm-valor">${brl(x.preco)}</b></span>
+              <a href="${esc(x.link)}" target="_blank" rel="noopener">Presentear</a>`;
+            ul.append(li);
+          });
+          ul.scrollTop = 0;
+        }
+        $('lmOrdem').onclick = () => { crescente = !crescente; desenharLista(); };
+        const fechar = () => { if (modal.open) modal.close(); };
+        modal.addEventListener('close', () => document.body.classList.remove('modal-aberto'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) fechar(); });   // toque fora fecha
+        $('lmFechar').onclick = fechar;
+        $('btnListaCompleta').onclick = () => {
+          desenharLista(); document.body.classList.add('modal-aberto');
+          if (modal.showModal) modal.showModal(); else modal.setAttribute('open', '');
+        };
+      }
+
       // Sugestões: cada cartão copia a chave Pix e lembra de escrever o presente na mensagem
       if (p.pix && p.sugestoes && p.sugestoes.length) {
         const box = $('f-sugestoes'); box.hidden = false; $('f-pix-titulo').hidden = false;
@@ -1013,6 +1157,12 @@
         let tAviso;
         p.sugestoes.forEach((g) => {
           const card = document.createElement('div'); card.className = 'sug';
+          if (g.link) {   // destaque com link de pagamento próprio
+            card.innerHTML = `<span class="sug-ic"><svg aria-hidden="true"><use href="#i-${esc(g.icone)}"/></svg></span>
+              <h3>${esc(g.nome)}</h3><p>${esc(g.texto)}</p>${g.preco ? `<b class="sug-preco">${brl(g.preco)}</b>` : ''}
+              <a class="btn btn-line btn-sm" href="${esc(g.link)}" target="_blank" rel="noopener">Presentear</a>`;
+            box.append(card); return;
+          }
           card.innerHTML = `<span class="sug-ic"><svg aria-hidden="true"><use href="#i-${esc(g.icone)}"/></svg></span>
             <h3>${esc(g.nome)}</h3><p>${esc(g.texto)}</p><button class="btn btn-line btn-sm" type="button">Presentear</button>`;
           card.querySelector('button').onclick = async () => {

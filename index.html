@@ -200,13 +200,14 @@
     #f-ver-lista{margin-top:20px}
 
     /* Janela da lista completa */
-    .lista-modal{width:100%;max-width:520px;max-height:92vh;max-height:92svh;margin:auto auto 0;padding:0;border:0;border-radius:24px 24px 0 0;
+    /* altura FIXA: alguns Safari encolhiam a lista a zero quando a altura vinha do conteúdo */
+    .lista-modal{width:100%;max-width:520px;height:86vh;height:86svh;max-height:none;margin:auto auto 0;padding:0;border:0;border-radius:24px 24px 0 0;
       background:var(--cream);color:var(--ink);box-shadow:0 -10px 40px rgba(60,20,10,.25)}
     .lista-modal[open]{display:flex;flex-direction:column;animation:sobe .35s ease}
     .lista-modal::backdrop{background:rgba(45,18,10,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
     @keyframes sobe{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
-    @media (min-width:600px){.lista-modal{margin:auto;border-radius:24px;max-height:86vh}}
-    .lm-topo{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:22px 20px 12px;border-bottom:1px solid var(--line)}
+    @media (min-width:600px){.lista-modal{margin:auto;border-radius:24px;height:80vh}}
+    .lm-topo{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px 10px;border-bottom:1px solid var(--line)}
     .lm-kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#c2410c}
     .lm-topo h3{margin-top:6px;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:1.35rem}
     .lm-fechar{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--paper);font-size:24px;line-height:1;color:var(--ink);cursor:pointer}
@@ -218,7 +219,7 @@
     .lm-chip[aria-pressed="true"]{background:var(--sunset);border-color:transparent;color:#fff}
     .lm-barra{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;font-size:11.5px;color:var(--ink-soft)}
     .lm-ordem{border:0;background:none;font:600 11.5px 'Montserrat',sans-serif;color:#c2410c;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-    .lm-lista{list-style:none;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 8px;flex:1}
+    .lm-lista{list-style:none;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 8px;flex:1 1 auto;min-height:0}
     .lm-item{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:12px 10px;border-radius:16px;background:var(--paper);
       border:1px solid var(--line);margin-bottom:8px}
     .lm-ic{width:42px;height:42px;border-radius:50%;background:#fff1e2;color:#c2410c;display:flex;align-items:center;justify-content:center}
@@ -541,7 +542,7 @@
     <div class="lm-filtros" id="lmFiltros" role="group" aria-label="Categorias"></div>
     <div class="lm-barra"><span id="lmQtd"></span><button type="button" class="lm-ordem" id="lmOrdem">Menor preço primeiro</button></div>
     <ul class="lm-lista" id="lmLista"></ul>
-    <p class="lm-rodape">Ao tocar em <b>Presentear</b>, você vai para o pagamento seguro do presente. Prefere enviar outro valor? Feche esta janela e use a chave Pix.</p>
+    <p class="lm-rodape">Toque em <b>Presentear</b> para ir ao pagamento. Outro valor? Use a chave Pix.</p>
   </dialog>
 
   <div id="petals"></div>
